@@ -70,11 +70,12 @@ class MaxRoundsExceededError(Exception):
 
 def extract_response(response_json: dict) -> str:
     is_groq = 'groq' in args.ollama_url
+    is_lambda = 'lambda.ai' in args.ollama_url
     is_ollama = not is_groq
     
     if is_ollama:
         return response_json['message']['content']
-    elif is_groq:
+    elif is_groq or is_lambda:
         return response_json['choices'][0]['message']['content']
     
 
