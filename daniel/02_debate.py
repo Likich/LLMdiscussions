@@ -37,9 +37,10 @@ import json
 import os
 import requests as r
 
+
 args = argparse.ArgumentParser()
 args.add_argument('--input', type=str, required=True)
-args.add_argument('--max-rounds', type=int, required=False, default=2)
+args.add_argument('--max-rounds', type=int, required=False, default=3)
 args.add_argument('--ollama-url', type=str, required=False, default='http://10.162.42.104:11434/api/chat')
 args.add_argument('--auth-header', type=str, required=False)
 
@@ -79,8 +80,6 @@ def extract_response(response_json: dict) -> str:
     is_lambda = 'lambda.ai' in args.ollama_url
     is_ollama = not is_groq and not is_lambda
     
-    print(args.ollama_url, is_ollama, is_groq, is_lambda)
-    
     if is_ollama:
         return response_json['message']['content']
     elif is_groq or is_lambda:
@@ -111,14 +110,12 @@ def generate_response(messages: list[Message], llm_idx: str) -> tuple[str, str]:
     initial_response.raise_for_status()
     initial_response = extract_response(initial_response.json())
     
-    print(f"LLM {llm_idx} responded with: {initial_response}")
-    
     # Now we summarize the response
     summary_response = r.post(f"{args.ollama_url}", json={
         "model": llm_model,
         "messages": [
-            { 'role': 'system', 'content': "Please summarize the users decision or code in one sentence. Just give the code and the justification, as if it were your own." },
-            { 'role': 'user', 'content': initial_response }
+            { 'role': 'system', 'content': "You are a helpful AI that is trying to collaboratively come up with qualitative codes. Your task now is to summarize the provided argument into a single sentence. Make sure to include the provided argument and final code, but be as concise as possible. Start your response by saying \"I propse [code], because\"" },
+            { 'role': 'assistant', 'content': initial_response }
         ],
         "temperature": 0.2,
         "stream": False,
@@ -130,7 +127,6 @@ def generate_response(messages: list[Message], llm_idx: str) -> tuple[str, str]:
     summary_response.raise_for_status()
     summary_response = extract_response(summary_response.json())
     
-    print(f"\n\n\nPrompting {llm_idx}, Messages were:\n" + ("\n".join(map(str, messages))))
     return initial_response, summary_response
 
 
@@ -151,7 +147,11 @@ def format_debate_prompt(data, q_idx, llm_idx):
         return messages, True
         
     else:
-        messages.append(Message('system', data['prompt']['system_debate']))
+        # Get my display name
+        model_display_name = data['meta']['llms'][llm_idx]['llm_display_name']
+        model_system_prompt = data['prompt']['system_debate'].replace('[[MODEL_NAME]]', model_display_name)
+        
+        messages.append(Message('system', model_system_prompt))
         messages.append(Message('user', data['prompt']['questions'][q_idx]))
         
         # Now we append all the responses from all rounds that are already completed
@@ -221,6 +221,8 @@ while True:
                 # Stack Trace for debugging
                 raise e
 
+            print(f"LLM {llm_idx} responded to question {q_idx}")
+            
             with open(args.input + ".tmp", 'w') as f:
                 json.dump(data, f, indent=4, sort_keys=True, ensure_ascii=False)
     
