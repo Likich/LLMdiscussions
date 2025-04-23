@@ -7,7 +7,7 @@ import sys
 import re # Import regex module for formatting
 
 # Define the port to run the server on
-PORT = 8001
+PORT = 8000
 # Define the path to the debate JSON file (will be set via command line arg)
 DEBATE_FILE_PATH = None
 
@@ -164,6 +164,9 @@ class DebateHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             background-color: #e9e9e9;
             padding: 10px;
             border-radius: 5px;
+            position: sticky;
+            top: 1em;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }}
         .initial-question {{
             grid-column: 1 / span {len(llm_keys) + 1}; /* Span across all columns */
@@ -206,7 +209,8 @@ class DebateHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
         # Add headers for each LLM column
         for llm_key in llm_keys:
             display_name = llm_meta.get(llm_key, {}).get('llm_display_name', llm_key)
-            html += f'        <div class="header">{display_name}</div>\n'
+            model_name = llm_meta.get(llm_key, {}).get('llm_model_name', llm_key)
+            html += f'        <div class="header">{display_name}<br />{model_name}</div>\n'
 
         # Add rows for each round
         for round_idx in range(num_rounds):
