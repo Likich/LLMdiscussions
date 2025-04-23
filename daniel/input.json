@@ -1,0 +1,54 @@
+{
+    "meta": {
+        "llms": {
+            "llm1": {
+                "llm_model_name": "llama3.2:3b",
+                "llm_display_name": "Model A"
+            },
+            "llm2": {
+                "llm_model_name": "phi4:14b",
+                "llm_display_name": "Model B"
+            },
+            "llm3": {
+                "llm_model_name": "mistral-small3.1:24b",
+                "llm_display_name": "Model C"
+            },
+            "llm4": {
+                "llm_model_name": "deepseek-r1:7b",
+                "llm_display_name": "Model D"
+            },
+            "llm5": {
+                "llm_model_name": "gemma3:4b",
+                "llm_display_name": "Model E"
+            }
+        }
+    },
+    "prompt": {
+        "system_initial": "A code is often a word or short phrase that symbolically assigns a summative, salient, essence-capturing and/or evocative attribute to a portion of language-based or visual data. Perform thematic analysis on the following comment in the user message and generate a concise qualitative code.",
+        "system_debate": "You are a helpful coding AI. You are collaborating with other coding AIs to refine qualitative codes. You will be given a comment and a code. Your task is to discuss the code with the other AIs and refine it collaboratively.",
+        "questions": {
+            "q00000": "Part 3\nThe owner of Remedy Wine Bar (which closes in days) asked people why they sh*t in his doorway when there is a Public Loo nearby.  Answer: Drug Dealers don’t allow them to use the loo; they’re doing business. \n\nAllowing that segment of the squatters who suffer (a) from mental illness or (b) addiction to rot outside is not an act of compassion.  If the Police may not engage, then they cannot triage.  YOU and Mayor Hales are, literally, killing them with your kindness. \n\nIf you think I’m an illiberal jerk, I’ll tell that I gave a year of my life (unpaid) to the Democratic Party in an effort to make Oregon a one-party state.  \n\nNow, it is time for Democrats to evolve.\n\nP.S.  Would you prefer a locked gate or armed guards?",
+            "q00001": "Militia's aren't your friend nor are they trying to protect or help anyone except themselves.  Please inform yourselves about what Sovereign Citizen Movement Militias are trying to do.  This militia group associated with this philosophy of Sovereign Citizens who believe in their right to not obey the laws, pay taxes they're lawless and make up their own laws and Constitution. These Militias  have killed more law enforcement across the  United States than any other movement.  The the membership is  all white extremists hate group who want to overthrow the State and United States Government.  They're not good guys they criminals and they kill people and seek revenge. Militia's hold  Kangaroo Courts, bully, stalk, harass and kill  people in communities that disagree. Communities do not want their help or protection so please get educated about these Sovereign Citizen Militias, they're dangerous.",
+            "q00002": "Well, this wasn't meant to be a dissertation. It's an entertainment piece, so I was mostly trying to be funny—whether I was successful in that regard is up to the reader. And of all these guys, I have a certain fondness for Hitchens, as I make clear, but I had to make fun of him for that whole \"women aren't funny\" thing. And while I can't say I have any \"favorite\" atheist artists or writers—I don't really seek them out, to be honest—I certainly don't think all atheists are \"awful\" (some of my best friends are atheists; some of them may even be gay and/or black!). I mostly just get annoyed when someone thinks identifying as an atheist inherently makes them smarter than a rational theist. I'm cool with whatever philosophical choice you've decided to live your life under, as long as you're not a dick about it.",
+            "q00003": "I think what we have here is a case when a coach gets so frustrated at the fact that his team (which he as probably seen play very aggressive against teams that mirror them) got on the court against a predominately if not all African American Team and wanted no parts of the competition physically. In a attempt to say hey fellas its basketball, hello!!! don't be afraid of them cause they don't look like you. Please fellas it can't be because they don't look like you. Damn it, it is. I can't believe this ish! Can you envision the frustration a coach could have if he believes his team is not playing defense because they don't want to touch a kid that is umm \"black.\" Is this a far fetched assumption by coach Adelman? Did he handle it correctly, not sure but......",
+            "q00004": "All this \"support our\" troops\" stuff is a bunch of drivel.  Why people would respect anyone who is willing to kill someone because they were ordered to by another, is beyond my comprehension. People who volunteer to participate in American gangsterism obviously do so for personal material gain--and they likely wrap their self-interest in the mantle of patriotism or some other nonsense. \nReinstitute a draft, include women,--go for it. The soft-brained ones will show up ready and willing. A bunch of others will head for the hills with their backpacks in hand and still others will simply head for jail. It could be the beginning of something positive, drafting women. Better the former scenarios than be institutionalized by the U.S. military's raping and robbing machine. Down with American imperialism, at home and abroad.",
+            "q00005": "I see it. The black people riot, set buildings on fire, loot businesses, attack innocent people and attack the police and the FBI did nothing . what the black people did last year was a act of terrorism by placing innocent people's lives  in danger . these white men did not riot, did not burn down buildings, did not attack innocent people, did not attacks cops and did not place innocent peoole's life in danger but the FBI went after them as if they were terrorist. There is a big difference in between in how we act compared to the black lives matter people.",
+            "q00006": "Bunkerhill01, I see why this looks bad.  But let's look at the differences.\n\nThe bad policing we saw with black Lives Matter was bad policing by local police.\n\nWhat we saw in Malheur was the FBI trying to avoid another Ruby Ridge.\n\nI think if the FBI was responding to a Black Lives protest, you might have seen better policing.\n\nLikewise, if the Ferguson police force had been put in charge of the Malheur occupation, there would have been a bloodbath.\n\nI don't \"love\" the FBI, but they are smarter and better trained than the underpaid, under trained cops that beat up protestors.\n\nMy issue is why the FBI wasn't at the Malheur refuse when the Bundys showed up and why the BLM didn't at least remove computers and heavy equipment.  Live and learn.\n\nBut yeah, I share your feelings that a racist religious terrorist like Ammon Bundy seems to get off easy. Lets hope he does a lot of time.",
+            "q00007": "I can't understand how defenders of Israel can condone the theft of Palestinian land; and how they can be justified on any grounds other than, well, we can take it.  Israel has continually drifted into the thrall of ultra right-wing Jews who believe that the only good Arab is a dead Arab, even to the point of murdering their own leaders (Rabin). Israel will never know peace unless and until they own up to what they did in 1967. I agree that the Palestinian leadership has been less than forthright over the years but in fact the great roadblock will forever be the West Bank and Gaza. \n\nMoreover, as long as 20% of the Israeli population are Arabs (who are strangers in their own land) Israel will never be fully democratic nor fully Jewish. It can be one or the other but not both. \n\nNow, Mr. Weinerman invokes the current chaos neighboring countries; chaos caused entirely by the American intervention in Iraq in 2003, as reason enough to hold on to what they took nearly 50 years ago.",
+            "q00008": "Since the Republicans have vowed to deny any nominee a vote, Obama should make a recess appointment.  Currently Congress is in recess and he could do it now.  Even if they managed to block and delay for the rest of the year, my understanding is that he could push through a nominee without consent from the Senate the first part of January.\n\nLet's get something clear about Scalia.  Our politics are a direct reflection of our moral beliefs.  He was understandably a conservative hero.  He was a champion of bigotry, blocking progress for non-heterosexuals at every turn.  He also blocked environmental protection every chance he got.  He had nine children, which is selfish and irresponsible......he was probably opposed to birth control.  And one of his favorite activities was killing defenseless animals for fun.  He was a terrible person.   This world and our Supreme Court  is much better off without him.",
+            "q00009": "\"This law subverts our ability to be watchful.\" - You need to pay closer attention.  All this bill does is make current case law here in Oregon statutory.   The legal system is already operating on this basis, and no abuse has ever occurred.  \n\n\"Conflating the civil disobedience of a group who has to date never hurt or killed anyone with radical Muslim extremists is nonsense\" - No, they are very much the same thing.   Both are being tracked by the Southern Poverty Law Center and others for being hate groups, as well as being monitored by the Department of Homeland Security.  Both pose a real danger to the government and to members of law enforcement.   They are heavily armed, and often threaten violence.\n\nYou forget about all of the many reports that came out of Burns, of people being intimidated and threatened by the Malheur occupiers and their supporters.  Many people in Burns were scared.  Those arrested all appear to be very dangerous armed individuals, who are mentally ill."
+        }
+    },
+    "debate": {
+        "q00000": {},
+        "q00001": {},
+        "q00002": {},
+        "q00003": {},
+        "q00004": {},
+        "q00005": {},
+        "q00006": {},
+        "q00007": {},
+        "q00008": {},
+        "q00009": {}
+    }
+}
