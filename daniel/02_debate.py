@@ -40,7 +40,9 @@ import requests as r
 args = argparse.ArgumentParser()
 args.add_argument('--input', type=str, required=True)
 args.add_argument('--max-rounds', type=int, required=False, default=2)
-args.add_argument('--ollama-url', type=str, required=False, default='http://10.162.42.104:11434')
+args.add_argument('--ollama-url', type=str, required=False, default='http://10.162.42.104:11434/api/chat')
+args.add_argument('--auth-header', type=str, required=False)
+
 args = args.parse_args()
 
 assert args.input.endswith('.json'), 'Input file must be a JSON file'
@@ -64,6 +66,19 @@ class AlreadyRespondedError(Exception):
 class MaxRoundsExceededError(Exception):
     pass
 
+
+
+def extract_response(response_json: dict) -> str:
+    is_groq = 'groq' in args.ollama_url
+    is_ollama = not is_groq
+    
+    if is_ollama:
+        return response_json['message']['content']
+    elif is_groq:
+        return response_json['choices'][0]['message']['content']
+    
+
+
 def generate_response(messages: list[Message], llm_idx: str) -> tuple[str, str]:
     """
     We query the LLM with the messages and get a response.
@@ -71,11 +86,13 @@ def generate_response(messages: list[Message], llm_idx: str) -> tuple[str, str]:
     """
     
     llm_model = data['meta']['llms'][llm_idx]['llm_model_name']
-    initial_response = r.post(f"{args.ollama_url}/api/chat", json={
+    initial_response = r.post(f"{args.ollama_url}", json={
         "model": llm_model,
         "messages": [ { 'role': message.role, 'content': message.content } for message in messages ],
         "temperature": 0.2,
         "stream": False,
+    }, headers={
+        'Authorization': args.auth_header
     })
     
     initial_response.raise_for_status()
@@ -84,7 +101,7 @@ def generate_response(messages: list[Message], llm_idx: str) -> tuple[str, str]:
     print(f"LLM {llm_idx} responded with: {inital_response}")
     
     # Now we summarize the response
-    summary_response = r.post(f"{args.ollama_url}/api/chat", json={
+    summary_response = r.post(f"{args.ollama_url}", json={
         "model": llm_model,
         "messages": [
             { 'role': 'system', 'content': "Please summarize the users decision or code in one sentence. Just give the code and the justification, as if it were your own." },
@@ -92,6 +109,8 @@ def generate_response(messages: list[Message], llm_idx: str) -> tuple[str, str]:
         ],
         "temperature": 0.2,
         "stream": False,
+    }, headers={
+        'Authorization': args.auth_header
     })
     
     summary_response.raise_for_status()
@@ -99,14 +118,6 @@ def generate_response(messages: list[Message], llm_idx: str) -> tuple[str, str]:
     
     print(f"\n\n\nPrompting {llm_idx}, Messages were:\n" + ("\n".join(map(str, messages))))
     return inital_response, summary_response
-
-def compute_token_probabilities(messages: list[Message], llm_idx: str):
-    """
-    Compute the token probabilities for the given messages.
-    Returns a list of lists, where each inner list contains the probabilities for the tokens in the message.
-    """
-    return [ [0.1] * len(message.content.split()) for message in messages ]
-    
 
 
 def format_debate_prompt(data, q_idx, llm_idx):
