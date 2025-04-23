@@ -50,7 +50,13 @@ assert os.path.exists(args.input), 'Input file does not exist'
 
 with open(args.input, 'r') as f:
     data = json.load(f)
+    
+# Check if there alreay is a checkpoint
+if os.path.exists(args.input + ".tmp"):
+    with open(args.input + ".tmp", 'r') as f:
+        data = json.load(f)
 
+    print(f"Checkpoint found, resuming from {args.input}.tmp")
 
 class Message:
     def __init__(self, role, content):
@@ -208,7 +214,7 @@ while True:
                 # Stack Trace for debugging
                 raise e
 
-            with open(args.input + ".debate", 'w') as f:
+            with open(args.input + ".tmp", 'w') as f:
                 json.dump(data, f, indent=4, sort_keys=True, ensure_ascii=False)
     
     with open(args.input + ".debate", 'w') as f:
