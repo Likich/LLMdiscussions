@@ -77,14 +77,15 @@ class MaxRoundsExceededError(Exception):
 def extract_response(response_json: dict) -> str:
     is_groq = 'groq' in args.ollama_url
     is_lambda = 'lambda.ai' in args.ollama_url
-    is_ollama = not is_groq
+    is_ollama = not is_groq and not is_lambda
+    
+    print(args.ollama_url, is_ollama, is_groq, is_lambda)
     
     if is_ollama:
         return response_json['message']['content']
     elif is_groq or is_lambda:
         return response_json['choices'][0]['message']['content']
     
-
 
 def generate_response(messages: list[Message], llm_idx: str) -> tuple[str, str]:
     """
@@ -99,32 +100,38 @@ def generate_response(messages: list[Message], llm_idx: str) -> tuple[str, str]:
         "temperature": 0.2,
         "stream": False,
     }, headers={
+        'Content-Type': 'application/json',
         'Authorization': args.auth_header
     })
     
-    initial_response.raise_for_status()
-    inital_response = initial_response.json()['message']['content']
+    if initial_response.status_code != 200:
+        print(f"Error: {initial_response.status_code} - {initial_response.text}")
+        raise Exception(f"Error: {initial_response.status_code} - {initial_response.text}")
     
-    print(f"LLM {llm_idx} responded with: {inital_response}")
+    initial_response.raise_for_status()
+    initial_response = extract_response(initial_response.json())
+    
+    print(f"LLM {llm_idx} responded with: {initial_response}")
     
     # Now we summarize the response
     summary_response = r.post(f"{args.ollama_url}", json={
         "model": llm_model,
         "messages": [
             { 'role': 'system', 'content': "Please summarize the users decision or code in one sentence. Just give the code and the justification, as if it were your own." },
-            { 'role': 'user', 'content': inital_response }
+            { 'role': 'user', 'content': initial_response }
         ],
         "temperature": 0.2,
         "stream": False,
     }, headers={
+        'Content-Type': 'application/json',
         'Authorization': args.auth_header
     })
     
     summary_response.raise_for_status()
-    summary_response = summary_response.json()['message']['content']
+    summary_response = extract_response(summary_response.json())
     
     print(f"\n\n\nPrompting {llm_idx}, Messages were:\n" + ("\n".join(map(str, messages))))
-    return inital_response, summary_response
+    return initial_response, summary_response
 
 
 def format_debate_prompt(data, q_idx, llm_idx):

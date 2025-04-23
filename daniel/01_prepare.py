@@ -3,32 +3,44 @@ This script takes JSON-files from Lika and brings them into my format :))
 """
 import json
 
-MAX_QUESTIONS = 10
+MAX_QUESTIONS = 1
 
 with open('lika.json') as fi, open('input.json', 'w') as fo:
     data_input = json.load(fi)
     data_output = {
         'meta': {
             'llms': {
+                # 'llm1': {
+                #     'llm_model_name': 'llama3.2:3b',
+                #     'llm_display_name': 'Model A'
+                # },
+                # 'llm2': {
+                #     'llm_model_name': 'phi4:14b',
+                #     'llm_display_name': 'Model B'
+                # },
+                # 'llm3': {
+                #     'llm_model_name': 'mistral-small3.1:24b',
+                #     'llm_display_name': 'Model C'
+                # },
+                # 'llm4': {
+                #     'llm_model_name': 'deepseek-r1:7b',
+                #     'llm_display_name': 'Model D'
+                # },
+                # 'llm5': {
+                #     'llm_model_name': 'gemma3:4b',
+                #     'llm_display_name': 'Model E'
+                # },
                 'llm1': {
-                    'llm_model_name': 'llama3.2:3b',
+                    'llm_model_name': 'llama-4-scout-17b-16e-instruct',
                     'llm_display_name': 'Model A'
                 },
                 'llm2': {
-                    'llm_model_name': 'phi4:14b',
+                    'llm_model_name': 'deepseek-llama3.3-70b',
                     'llm_display_name': 'Model B'
                 },
                 'llm3': {
-                    'llm_model_name': 'mistral-small3.1:24b',
+                    'llm_model_name': 'hermes3-8b',
                     'llm_display_name': 'Model C'
-                },
-                'llm4': {
-                    'llm_model_name': 'deepseek-r1:7b',
-                    'llm_display_name': 'Model D'
-                },
-                'llm5': {
-                    'llm_model_name': 'gemma3:4b',
-                    'llm_display_name': 'Model E'
                 },
             }
         },
