@@ -67,7 +67,7 @@ def generate_3d_umap_plot(df, columns, title, output_path):
 
     plt.savefig(output_path, bbox_inches="tight")
     plt.close()
-    print(f"✅ Saved: {output_path}")
+    print(f"Saved: {output_path}")
 
 
 for file in os.listdir(CSV_DIR):
@@ -81,7 +81,6 @@ for file in os.listdir(CSV_DIR):
     output_dir = os.path.join(PLOTS_BASE_DIR, file_base)
     os.makedirs(output_dir, exist_ok=True)
 
-    # 🔍 Detect models in this file
     detected_models = []
     for prefix in ["Maverick", "Llama3.3", "Deepseek", "Gemma", "Mistral"]:
         if any(col.startswith(prefix) for col in df.columns):
@@ -91,10 +90,7 @@ for file in os.listdir(CSV_DIR):
         print(f"⏭ Skipping {file} — only {len(detected_models)} model(s) found.")
         continue
 
-    # ⬇️ This stays local for the file
     model_prefixes = detected_models
-
-    # Define inside this scope
     def get_round_columns(df, round_label):
         cols = []
         for model in model_prefixes:

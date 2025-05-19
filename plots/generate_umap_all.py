@@ -48,7 +48,7 @@ def generate_umap_plot(file_path, mode="final"):
             labels.extend([model] * len(cleaned))
 
     if not all_texts:
-        print(f"⚠️  Skipping {file_name} — no usable text data for mode: {mode}.")
+        print(f"Skipping {file_name} — no usable text data for mode: {mode}.")
         return
 
     vectorizer = TfidfVectorizer()
@@ -71,9 +71,8 @@ def generate_umap_plot(file_path, mode="final"):
     output_path = os.path.join(output_dir, f"{mode}_umap.png")
     plt.savefig(output_path, bbox_inches="tight")
     plt.close()
-    print(f"✅ Saved {mode} UMAP to: {output_path}")
+    print(f"Saved {mode} UMAP to: {output_path}")
 
-# Loop over all cleaned CSVs
 for file in os.listdir(CSV_DIR):
     if file.endswith("_cleaned.csv"):
         full_path = os.path.join(CSV_DIR, file)
