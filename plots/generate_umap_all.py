@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.feature_extraction.text import TfidfVectorizer
 
-CSV_DIR = os.path.join("..", "csv_files", "new_extracted")
+CSV_DIR = os.path.join("..", "plots", "filtered_csvs")
 PLOTS_BASE_DIR = "plots"
 
 os.makedirs(PLOTS_BASE_DIR, exist_ok=True)

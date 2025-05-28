@@ -3,7 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
-CSV_DIR = os.path.join("..", "csv_files", "new_extracted")
+CSV_DIR = os.path.join("..", "plots", "filtered_csvs")
 PLOTS_DIR = "plots"
 
 ROUNDS = ["initial", "R1", "R2", "R3", "R4", "R5", "final"]

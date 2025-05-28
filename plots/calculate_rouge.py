@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from rouge_score import rouge_scorer
 
-CSV_DIR = os.path.join("..", "csv_files", "new_extracted")
+CSV_DIR = os.path.join("..", "plots", "filtered_csvs")
 PLOTS_DIR = "plots"
 ROUNDS = ["initial", "R1", "R2", "R3", "R4", "R5", "final"]
 

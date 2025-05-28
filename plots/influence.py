@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
-CSV_DIR = os.path.join("..", "csv_files", "new_extracted")
+CSV_DIR = os.path.join("..", "plots", "filtered_csvs")
 PLOTS_DIR = "plots"
 ROUNDS = ["1", "2", "3", "4", "5", "6", "7"]
 MODEL_PREFIXES = ["Maverick", "Llama3.3", "Deepseek", "Gemma", "Mistral"]

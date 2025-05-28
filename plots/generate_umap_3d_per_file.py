@@ -6,8 +6,7 @@ import seaborn as sns
 import umap
 from sklearn.feature_extraction.text import TfidfVectorizer
 from mpl_toolkits.mplot3d import Axes3D
-
-CSV_DIR = os.path.join("..", "csv_files", "new_extracted")
+CSV_DIR = os.path.join("..", "plots", "filtered_csvs")
 PLOTS_BASE_DIR = "plots"
 
 os.makedirs(PLOTS_BASE_DIR, exist_ok=True)

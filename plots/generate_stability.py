@@ -2,7 +2,7 @@ import os
 import pandas as pd
 import matplotlib.pyplot as plt
 
-CSV_DIR = os.path.join("..", "csv_files", "new_extracted")
+CSV_DIR = os.path.join("..", "plots", "filtered_csvs")
 PLOTS_DIR = "plots"
 
 ROUNDS = ["initial", "R1", "R2", "R3", "R4", "R5", "final"]
@@ -52,6 +52,9 @@ def compute_code_stability(df, models):
 
 def plot_stability(df_stability, output_path, title):
     plt.figure(figsize=(12, 6))
+    print("\n🧠 DEBUG: df_stability columns:", df_stability.columns.tolist())
+    print("🧠 DEBUG: df_stability head:\n", df_stability.head())
+
     for model in df_stability["Model"].unique():
         model_data = df_stability[df_stability["Model"] == model]
         plt.plot(model_data["Round_Transition"], model_data["Code_Change_Ratio"], marker='o', label=model)
