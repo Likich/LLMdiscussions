@@ -85,7 +85,7 @@ for file in os.listdir(CSV_DIR):
         continue
 
     stability_df = compute_code_stability(df, models)
-    # stability_df.to_csv(os.path.join(output_dir, "code_stability.csv"), index=False)
+    stability_df.to_csv(os.path.join(output_dir, "code_stability.csv"), index=False)
     plot_stability(stability_df, os.path.join(output_dir, "code_stability.png"), title=file_base)
 
     print(f"Stability plot saved for {file_base}")
